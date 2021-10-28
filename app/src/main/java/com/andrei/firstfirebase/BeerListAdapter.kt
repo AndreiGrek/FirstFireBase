@@ -1,6 +1,7 @@
 package com.andrei.firstfirebase
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,29 +28,28 @@ class BeerListAdapter(val context: Context, var beerList: MutableList<Beer>) :
         holder.itemView.findViewById<TextView>(R.id.textView_beerName).text = beer.beerName
         holder.itemView.findViewById<TextView>(R.id.textView_breweryName).text = beer.breweryName
         holder.itemView.findViewById<TextView>(R.id.textView_litres).text = beer.litres
+
+        holder.beer = beer
     }
 }
 
-class CustomViewHolder(val view: View, var beer: Beer? = null) : RecyclerView.ViewHolder(view) {
+class CustomViewHolder(val view: View, var beer: Beer? = null ) : RecyclerView.ViewHolder(view) {
 
     companion object {
-        val FILM_NAME_KEY = "FILM_NAME"
-        val FILM_NAMEENG_KEY = "FILM_NAMEENG"
-        val FILM_PREMIERE_KEY = "FILM_PREMIERE"
-        val FILM_DESCRIPTION_KEY = "FILM_DESCRIPTION"
-        val FILM_LINK_KEY = "FILM_LINK"
+        val BEER_NAME_KEY = "BEER_NAME"
+        val FREWERY_NAME_KEY = "FREWERY_NAME"
+        val LITRE_KEY = "LITRE"
     }
 
     init {
         view.setOnClickListener {
-//            val intentToInfoActivity = Intent(view.context, FilmInfoActivity::class.java)
+            val intentToInfoActivity = Intent(view.context, BeerInfoActivity::class.java)
+            Log.d("Tag22", (beer==null).toString())
+            intentToInfoActivity.putExtra(BEER_NAME_KEY, beer?.beerName)
+            intentToInfoActivity.putExtra(FREWERY_NAME_KEY, beer?.breweryName)
+            intentToInfoActivity.putExtra(LITRE_KEY, beer?.litres)
 //
-//            intentToInfoActivity.putExtra(FILM_NAMEENG_KEY, film?.name_eng)
-//            intentToInfoActivity.putExtra(FILM_NAME_KEY, film?.name)
-//            intentToInfoActivity.putExtra(FILM_DESCRIPTION_KEY, film?.description)
-//            intentToInfoActivity.putExtra(FILM_PREMIERE_KEY, film?.premiere)
-//            intentToInfoActivity.putExtra(FILM_LINK_KEY, film?.image)
-//            view.context.startActivity(intentToInfoActivity)
+            view.context.startActivity(intentToInfoActivity)
         }
     }
 }

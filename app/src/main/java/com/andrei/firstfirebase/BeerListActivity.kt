@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
-class BeerListActivity : AppCompatActivity(), PresentorView {
+class BeerListActivity : AppCompatActivity(), BeerListPresentorView {
 
     lateinit var beerListAdapter: BeerListAdapter
     lateinit var beerListPresentor: BeerListPresentor
@@ -22,7 +22,7 @@ class BeerListActivity : AppCompatActivity(), PresentorView {
         beerListPresentor.getFromDB()
     }
 
-    override fun showData(beerList: MutableList<Beer>) {
+     override fun showData(beerList: MutableList<Beer>) {
         beerListAdapter = BeerListAdapter(this, beerList)
         beerListAdapter.notifyDataSetChanged()
         findViewById<RecyclerView>(R.id.recyclerView_list).adapter = beerListAdapter

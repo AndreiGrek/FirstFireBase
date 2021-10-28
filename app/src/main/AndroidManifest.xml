@@ -9,8 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FirstFireBase">
-        <activity android:name=".BeerListActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".BeerInfoActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".BeerListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BeerListActivity" />
+        </activity>
+        <activity
+            android:name=".BeerListActivity"
+            android:label="Beer List Info"
+            android:launchMode="singleTop"
+            android:parentActivityName=".activities.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.main.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

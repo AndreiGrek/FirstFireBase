@@ -1,5 +1,5 @@
 package com.andrei.firstfirebase
 
-interface PresentorView {
+interface BeerListPresentorView {
     fun showData(beerList: MutableList<Beer>)
 }

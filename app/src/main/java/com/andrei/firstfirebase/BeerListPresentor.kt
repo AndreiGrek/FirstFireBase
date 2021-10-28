@@ -3,7 +3,8 @@ package com.andrei.firstfirebase
 import android.util.Log
 import com.google.firebase.database.*
 
-class BeerListPresentor (var presentorView: PresentorView) {
+class BeerListPresentor (var presentorView: BeerListPresentorView? = null) {
+
 
     private lateinit var mDataBase: DatabaseReference
     private val USER_KEY: String = "User"
@@ -28,7 +29,7 @@ class BeerListPresentor (var presentorView: PresentorView) {
 
                 Log.d("TAG", "сработала загрузка")
                 Log.d("TAGGGG", beer.beerName)
-                presentorView.showData(beerList)
+                presentorView?.showData(beerList)
                 Log.d("Поток", "Конец презентора: " + Thread.currentThread().name)
             }
 
@@ -40,6 +41,8 @@ class BeerListPresentor (var presentorView: PresentorView) {
     }
 
      fun insertIntoDB(beer: Beer){
+         mDataBase = FirebaseDatabase.getInstance().getReference(USER_KEY)
          mDataBase.push().setValue(beer)
+
     }
 }
