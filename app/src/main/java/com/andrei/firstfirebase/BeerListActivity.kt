@@ -1,6 +1,7 @@
 package com.andrei.firstfirebase
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ class BeerListActivity : AppCompatActivity(), PresentorView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beer_list)
-
+        Log.d("Поток", "БирЛист: " + Thread.currentThread().name)
         beerListPresentor = BeerListPresentor(this)
 
         findViewById<RecyclerView>(R.id.recyclerView_list).layoutManager = LinearLayoutManager(this)

@@ -10,10 +10,14 @@ class BeerListPresentor (var presentorView: PresentorView) {
     lateinit var beer: Beer
     var beerList = mutableListOf<Beer>()
 
+
     fun getFromDB() {
+        Log.d("Поток", "Начало презентора: " + Thread.currentThread().name)
+
         mDataBase = FirebaseDatabase.getInstance().getReference(USER_KEY)
         mDataBase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
+                Log.d("Поток", "Середина презентора: " + Thread.currentThread().name)
                 if(beerList.size > 0){
                     beerList.clear()
                 }
@@ -25,6 +29,7 @@ class BeerListPresentor (var presentorView: PresentorView) {
                 Log.d("TAG", "сработала загрузка")
                 Log.d("TAGGGG", beer.beerName)
                 presentorView.showData(beerList)
+                Log.d("Поток", "Конец презентора: " + Thread.currentThread().name)
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -32,5 +37,9 @@ class BeerListPresentor (var presentorView: PresentorView) {
             }
 
         })
+    }
+
+     fun insertIntoDB(beer: Beer){
+         mDataBase.push().setValue(beer)
     }
 }
